@@ -59,47 +59,59 @@ with st.sidebar:
     )
     
     if token:
-        st.caption("✅ Token will be added to Authorization header")
+        st.caption("Token will be added to Authorization header")
     
     # Auto-wrap option
     st.subheader("JSON Wrapping")
     auto_wrap = st.checkbox(
-        "Auto-wrap with data/inputs",
+        "Auto-wrap JSON",
         value=True,
         help="Automatically wrap JSON with 'data' and 'inputs' fields"
     )
+
+    st.subheader("Query Parameters")
+    query_params = st.checkbox(
+        "Add section",
+        value=False,
+        help="Add section to include query paramters in request"
+    )
+
     
     # Timeout
-    timeout = st.number_input("Timeout (seconds)", min_value=1, max_value=300, value=10)
+    timeout = st.number_input("Timeout (seconds)", min_value=1, max_value=300, value=100)
 
 # Main content area
-col1, col2 = st.columns([1, 1])
+if query_params:
+    col1, col2 = st.columns(2)
+else:
+    col1 = st.columns(1)
 
 # Left column - Request configuration
 with col1:
-    st.subheader("📝 Request Body")
+    st.subheader("Request Body")
     request_body = st.text_area(
         "Body (JSON)",
         value='{}',
         height=250,
-        help="Provide request body as JSON (supports trailing commas and None values)"
+        help="Provide request body as JSON"
     )
 
 # Right column - Query Parameters
-with col2:
-    st.subheader("🔍 Query Parameters")
-    query_params = st.text_area(
-        "Query Parameters (JSON)",
-        value='{}',
-        height=250,
-        help="Provide query parameters as JSON object (supports trailing commas and None values)"
-    )
+if show_extra_column: 
+    with col2:
+        st.subheader("Query Parameters")
+        query_params = st.text_area(
+            "Query Parameters (JSON)",
+            value='{}',
+            height=250,
+            help="Provide query parameters as JSON object (supports trailing commas and None values)"
+        )
 
 # Send button
 st.divider()
-if st.button("🚀 Send POST Request", type="primary", use_container_width=True):
+if st.button("Send POST Request", type="primary", use_container_width=True):
     if not endpoint:
-        st.error("❌ Please enter an endpoint URL")
+        st.error("Please enter an endpoint URL")
     else:
         try:
             # Parse headers
@@ -114,12 +126,13 @@ if st.button("🚀 Send POST Request", type="primary", use_container_width=True)
                 headers["Authorization"] = f"Bearer {token}"
             
             # Parse query parameters
-            try:
-                params_cleaned = clean_json_string(query_params)
-                params = json.loads(params_cleaned) if params_cleaned.strip() else {}
-            except json.JSONDecodeError as e:
-                st.error(f"Invalid Query Parameters JSON: {e}")
-                params = {}
+            if query_params:
+                try:
+                    params_cleaned = clean_json_string(query_params)
+                    params = json.loads(params_cleaned) if params_cleaned.strip() else {}
+                except json.JSONDecodeError as e:
+                    st.error(f"Invalid Query Parameters JSON: {e}")
+                    params = {}
             
             # Parse request body
             try:
