@@ -84,7 +84,7 @@ with st.sidebar:
 if query_params:
     col1, col2 = st.columns(2)
 else:
-    col1 = st.columns(1)
+    col1, = st.columns(1)
 
 # Left column - Request configuration
 with col1:
@@ -97,7 +97,7 @@ with col1:
     )
 
 # Right column - Query Parameters
-if show_extra_column: 
+if query_params: 
     with col2:
         st.subheader("Query Parameters")
         query_params = st.text_area(
