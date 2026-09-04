@@ -1,12 +1,27 @@
 import streamlit as st
 import requests
 import json
+import re
 from typing import Any, Dict
 
 st.set_page_config(page_title="API Call Tool", layout="wide")
 
 st.title("🔌 API Call Tool")
 st.markdown("Make HTTP POST requests to any endpoint and view the response")
+
+def clean_json_string(json_str: str) -> str:
+    """
+    Clean JSON string by:
+    1. Replacing 'None' with 'null'
+    2. Removing trailing commas
+    """
+    # Replace Python's None with JSON's null
+    json_str = re.sub(r'\bNone\b', 'null', json_str)
+    
+    # Remove trailing commas before closing brackets/braces
+    json_str = re.sub(r',(\s*[}\]])', r'\1', json_str)
+    
+    return json_str
 
 # Sidebar configuration
 with st.sidebar:
@@ -53,7 +68,7 @@ with col1:
         "Body (JSON)",
         value='{}',
         height=250,
-        help="Provide request body as JSON"
+        help="Provide request body as JSON (supports trailing commas and None values)"
     )
 
 # Right column - Query Parameters
@@ -63,7 +78,7 @@ with col2:
         "Query Parameters (JSON)",
         value='{}',
         height=250,
-        help="Provide query parameters as JSON object"
+        help="Provide query parameters as JSON object (supports trailing commas and None values)"
     )
 
 # Send button
@@ -75,7 +90,8 @@ if st.button("🚀 Send POST Request", type="primary", use_container_width=True)
         try:
             # Parse headers
             try:
-                headers = json.loads(headers_json) if headers_json.strip() else {}
+                headers_cleaned = clean_json_string(headers_json)
+                headers = json.loads(headers_cleaned) if headers_cleaned.strip() else {}
             except json.JSONDecodeError as e:
                 st.error(f"Invalid Headers JSON: {e}")
                 headers = {}
@@ -86,14 +102,16 @@ if st.button("🚀 Send POST Request", type="primary", use_container_width=True)
             
             # Parse query parameters
             try:
-                params = json.loads(query_params) if query_params.strip() else {}
+                params_cleaned = clean_json_string(query_params)
+                params = json.loads(params_cleaned) if params_cleaned.strip() else {}
             except json.JSONDecodeError as e:
                 st.error(f"Invalid Query Parameters JSON: {e}")
                 params = {}
             
             # Parse request body
             try:
-                body = json.loads(request_body) if request_body.strip() else None
+                body_cleaned = clean_json_string(request_body)
+                body = json.loads(body_cleaned) if body_cleaned.strip() else None
             except json.JSONDecodeError as e:
                 st.error(f"Invalid Request Body JSON: {e}")
                 body = None
