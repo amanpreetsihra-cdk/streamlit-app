@@ -23,6 +23,20 @@ def clean_json_string(json_str: str) -> str:
     
     return json_str
 
+def wrap_with_data_and_inputs(data_obj: Dict) -> Dict:
+    """
+    Wraps the data object with 'data' and 'inputs' fields.
+    Inputs stores the data as a list.
+    
+    Example:
+    Input: {"header": {...}}
+    Output: {"data": {"header": {...}}, "inputs": [{"header": {...}}]}
+    """
+    return {
+        "data": data_obj,
+        "inputs": [data_obj]
+    }
+
 # Sidebar configuration
 with st.sidebar:
     st.header("Connection Settings")
@@ -54,6 +68,14 @@ with st.sidebar:
     
     if token:
         st.caption("✅ Token will be added to Authorization header")
+    
+    # Auto-wrap option
+    st.subheader("JSON Wrapping")
+    auto_wrap = st.checkbox(
+        "Auto-wrap with data/inputs",
+        value=True,
+        help="Automatically wrap JSON with 'data' and 'inputs' fields"
+    )
     
     # Timeout
     timeout = st.number_input("Timeout (seconds)", min_value=1, max_value=300, value=10)
@@ -115,6 +137,10 @@ if st.button("🚀 Send POST Request", type="primary", use_container_width=True)
             except json.JSONDecodeError as e:
                 st.error(f"Invalid Request Body JSON: {e}")
                 body = None
+            
+            # Auto-wrap with data and inputs if enabled
+            if auto_wrap and body:
+                body = wrap_with_data_and_inputs(body)
             
             # Make POST request
             with st.spinner("Sending POST request..."):
