@@ -62,9 +62,9 @@ with st.sidebar:
 col1, col2 = st.columns([1, 1])
 
 with col1:
-    if st.button("🚀 Send Request", type="primary", use_container_width=True):
+    if st.button("Send Request", type="primary", use_container_width=True):
         if not endpoint:
-            st.error("❌ Please enter an endpoint URL")
+            st.error("Please enter an endpoint URL")
         else:
             try:
                 # Parse headers
@@ -112,13 +112,13 @@ with col1:
                 st.session_state.response_time = response.elapsed.total_seconds()
                 
             except requests.exceptions.Timeout:
-                st.error("⏱️ Request timed out. Try increasing the timeout value.")
+                st.error("Request timed out. Try increasing the timeout value.")
             except requests.exceptions.ConnectionError:
-                st.error("🔌 Connection error. Check the endpoint URL and your internet connection.")
+                st.error("Connection error. Check the endpoint URL and your internet connection.")
             except requests.exceptions.RequestException as e:
-                st.error(f"❌ Request failed: {str(e)}")
+                st.error(f"Request failed: {str(e)}")
             except Exception as e:
-                st.error(f"❌ Error: {str(e)}")
+                st.error(f"Error: {str(e)}")
 
 # Display response
 if "response" in st.session_state:
