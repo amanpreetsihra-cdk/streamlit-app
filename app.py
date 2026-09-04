@@ -133,6 +133,8 @@ if st.button("Send POST Request", type="primary", use_container_width=True):
                 except json.JSONDecodeError as e:
                     st.error(f"Invalid Query Parameters JSON: {e}")
                     params = {}
+            else:
+                params = {}
             
             # Parse request body
             try:
