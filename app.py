@@ -5,7 +5,7 @@ from typing import Any, Dict
 
 st.set_page_config(page_title="API Call Tool", layout="wide")
 
-st.title("🔌 API Call Tool")
+st.title("API Call Tool")
 st.markdown("Make HTTP POST requests to any endpoint and view the response")
 
 # Sidebar configuration
@@ -114,12 +114,12 @@ with st.sidebar:
     timeout = st.number_input("Timeout (seconds)", min_value=1, max_value=300, value=10)
 
 # Main content area
-if st.button("🚀 Send POST Request", type="primary", use_container_width=True):
+if st.button("Send POST Request", type="primary", use_container_width=True):
     try:
         if connection_type == "Databricks (Optional)":
             # Databricks connection
             if not databricks_host:
-                st.error("❌ Please enter Databricks host")
+                st.error("Please enter Databricks host")
             else:
                 with st.spinner("Calling Databricks API..."):
                     # Build full URL
@@ -165,7 +165,7 @@ if st.button("🚀 Send POST Request", type="primary", use_container_width=True)
         
         else:  # Generic API
             if not endpoint:
-                st.error("❌ Please enter an endpoint URL")
+                st.error("Please enter an endpoint URL")
             else:
                 try:
                     # Parse headers
@@ -203,22 +203,22 @@ if st.button("🚀 Send POST Request", type="primary", use_container_width=True)
                     }
                 
                 except requests.exceptions.Timeout:
-                    st.error("⏱️ Request timed out. Try increasing the timeout value.")
+                    st.error("Request timed out. Try increasing the timeout value.")
                 except requests.exceptions.ConnectionError:
-                    st.error("🔌 Connection error. Check the endpoint URL and your internet connection.")
+                    st.error("Connection error. Check the endpoint URL and your internet connection.")
                 except requests.exceptions.RequestException as e:
-                    st.error(f"❌ Request failed: {str(e)}")
+                    st.error(f"Request failed: {str(e)}")
                 except Exception as e:
-                    st.error(f"❌ Error: {str(e)}")
+                    st.error(f"Error: {str(e)}")
     
     except requests.exceptions.Timeout:
-        st.error("⏱️ Request timed out. Try increasing the timeout value.")
+        st.error("Request timed out. Try increasing the timeout value.")
     except requests.exceptions.ConnectionError:
-        st.error("🔌 Connection error. Check the host and your internet connection.")
+        st.error("Connection error. Check the host and your internet connection.")
     except requests.exceptions.RequestException as e:
-        st.error(f"❌ Request failed: {str(e)}")
+        st.error(f"Request failed: {str(e)}")
     except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
+        st.error(f"Error: {str(e)}")
 
 # Display response
 if "response" in st.session_state:
