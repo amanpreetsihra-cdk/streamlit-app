@@ -6,7 +6,7 @@ from typing import Any, Dict
 
 st.set_page_config(page_title="API Call Tool", layout="wide")
 
-st.title("🔌 API Call Tool")
+st.title("API Call Tool")
 st.markdown("Make HTTP POST requests to any endpoint and view the response")
 
 def clean_json_string(json_str: str) -> str:
@@ -33,8 +33,9 @@ def wrap_with_data_and_inputs(data_obj: Dict) -> Dict:
     Output: {"data": {"header": {...}}, "inputs": [{"header": {...}}]}
     """
     return {
-        "data": data_obj,
-        "inputs": [data_obj]
+        "inputs": [{
+            "data": data_obj
+        }],
     }
 
 # Sidebar configuration
@@ -46,15 +47,6 @@ with st.sidebar:
         "Endpoint URL",
         placeholder="https://api.example.com/endpoint",
         help="Full URL of the API endpoint"
-    )
-    
-    # Headers section
-    st.subheader("Headers")
-    headers_json = st.text_area(
-        "Headers (JSON)",
-        value='{"Content-Type": "application/json"}',
-        height=100,
-        help="Provide headers as JSON object"
     )
     
     # Token/API Key
@@ -112,8 +104,7 @@ if st.button("🚀 Send POST Request", type="primary", use_container_width=True)
         try:
             # Parse headers
             try:
-                headers_cleaned = clean_json_string(headers_json)
-                headers = json.loads(headers_cleaned) if headers_cleaned.strip() else {}
+                headers = {"Content-Type": "application/json"}
             except json.JSONDecodeError as e:
                 st.error(f"Invalid Headers JSON: {e}")
                 headers = {}
@@ -154,13 +145,13 @@ if st.button("🚀 Send POST Request", type="primary", use_container_width=True)
             }
         
         except requests.exceptions.Timeout:
-            st.error("⏱️ Request timed out. Try increasing the timeout value.")
+            st.error("Request timed out. Try increasing the timeout value.")
         except requests.exceptions.ConnectionError:
-            st.error("🔌 Connection error. Check the endpoint URL and your internet connection.")
+            st.error("Connection error. Check the endpoint URL and your internet connection.")
         except requests.exceptions.RequestException as e:
-            st.error(f"❌ Request failed: {str(e)}")
+            st.error(f"Request failed: {str(e)}")
         except Exception as e:
-            st.error(f"❌ Error: {str(e)}")
+            st.error(f"Error: {str(e)}")
 
 # Display response
 if "response" in st.session_state:
@@ -181,7 +172,7 @@ if "response" in st.session_state:
         st.metric("Content Length", f"{len(response.content)} bytes")
     
     # Response headers
-    with st.expander("📋 Response Headers"):
+    with st.expander("Response Headers"):
         header_dict = dict(response.headers)
         st.json(header_dict)
     
@@ -213,7 +204,7 @@ if "response" in st.session_state:
 
 # History section
 st.divider()
-with st.expander("📜 Request History"):
+with st.expander("Request History"):
     if "history" not in st.session_state:
         st.session_state.history = []
     
