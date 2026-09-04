@@ -52,7 +52,7 @@ with st.sidebar:
     # Token/API Key
     st.subheader("Authentication")
     token = st.text_input(
-        "Token/API Key (Optional)",
+        "Token/API Key",
         type="password",
         placeholder="your-token-here",
         help="Bearer token or API key if needed"
