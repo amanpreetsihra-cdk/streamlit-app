@@ -37,19 +37,9 @@ button[data-baseweb="tab"] {
 
 /* ── Expander cards ── */
 div[data-testid="stExpander"] {
-    background: #000000 !important;
     border-radius: 12px !important;
-    border: 1px solid #333333 !important;
+    border: 1px solid #e2e8f0 !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-div[data-testid="stExpander"] summary,
-div[data-testid="stExpander"] summary span,
-div[data-testid="stExpander"] svg {
-    color: #ffffff !important;
-    fill: #ffffff !important;
-}
-div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
-    color: #ffffff !important;
 }
 
 /* ── Primary button ── */
@@ -72,13 +62,21 @@ div[data-testid="stJson"] {
 }
 
 /* ── Tab content panels ── */
-div[data-testid="stTabs"] > div[role="tabpanel"] {
-    background: #000000;
+div[data-testid="stTabs"] [role="tabpanel"] {
+    background: #000000 !important;
     border-radius: 0 0 10px 10px;
     padding: 12px;
 }
-div[data-testid="stTabs"] > div[role="tabpanel"] * {
-    color: #ffffff;
+div[data-testid="stTabs"] [role="tabpanel"] div[data-testid="stVerticalBlockBorderWrapper"],
+div[data-testid="stTabs"] [role="tabpanel"] div[data-testid="stVerticalBlock"],
+div[data-testid="stTabs"] [role="tabpanel"] div[data-testid="element-container"],
+div[data-testid="stTabs"] [role="tabpanel"] div[data-testid="stElementToolbar"],
+div[data-testid="stTabs"] [role="tabpanel"] div[class*="block-container"],
+div[data-testid="stTabs"] [role="tabpanel"] section {
+    background: #000000 !important;
+}
+div[data-testid="stTabs"] [role="tabpanel"] * {
+    color: #ffffff !important;
 }
 
 /* ── Text input / text area ── */
