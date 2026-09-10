@@ -13,11 +13,9 @@ st.markdown("""
 <style>
 /* ── Metric cards ── */
 div[data-testid="stMetric"] {
-    background: #000000;
-    border: 1px solid #333333;
-    border-radius: 12px;
-    padding: 16px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: #0f0e0e;
+    border: none !important;
+    box-shadow: none !important;
 }
 div[data-testid="stMetric"] label {
     font-size: 0.78rem;
@@ -34,27 +32,12 @@ button[data-baseweb="tab"] {
     font-weight: 600 !important;
     font-size: 0.88rem !important;
 }
-
 /* ── Expander cards ── */
 div[data-testid="stExpander"] {
     background: #000000 !important;
     border-radius: 12px !important;
-    border: 1px solid #333333 !important;
+    border: 1px solid #e2e8f0 !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-div[data-testid="stExpander"] details {
-    background: #000000 !important;
-}
-div[data-testid="stExpander"] summary,
-div[data-testid="stExpander"] summary span,
-div[data-testid="stExpander"] summary svg {
-    color: #ffffff !important;
-    fill: #ffffff !important;
-}
-div[data-testid="stExpander"] div[data-testid="stExpanderDetails"],
-div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] * {
-    color: #ffffff !important;
-    background: #000000 !important;
 }
 
 /* ── Primary button ── */
@@ -399,6 +382,7 @@ if "response" in st.session_state:
     response_time = st.session_state.response_time
 
     st.divider()
+    st.subheader("📤 Response")
 
     # Response metadata cards
     m1, m2, m3 = st.columns(3)
