@@ -37,9 +37,19 @@ button[data-baseweb="tab"] {
 
 /* ── Expander cards ── */
 div[data-testid="stExpander"] {
+    background: #000000 !important;
     border-radius: 12px !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #333333 !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+div[data-testid="stExpander"] summary,
+div[data-testid="stExpander"] summary span,
+div[data-testid="stExpander"] svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
+    color: #ffffff !important;
 }
 
 /* ── Primary button ── */
