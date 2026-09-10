@@ -13,7 +13,6 @@ st.markdown("""
 <style>
 /* ── Metric cards ── */
 div[data-testid="stMetric"] {
-    background: #0f0e0e;
     border: none !important;
     box-shadow: none !important;
 }
@@ -29,13 +28,11 @@ div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
 
 /* ── Tabs ── */
 button[data-baseweb="tab"] {
-    background: #000000;
     font-weight: 600 !important;
     font-size: 0.88rem !important;
 }
 /* ── Expander cards ── */
 div[data-testid="stExpander"] {
-    background: #000000 !important;
     border-radius: 12px !important;
     border: 1px solid #e2e8f0 !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
@@ -455,8 +452,6 @@ if "response" in st.session_state:
         if "request_details" in st.session_state:
             details = st.session_state.request_details
             st.markdown(
-                '<div style="background:#000000;'
-                'border:1px solid #e0e7ff;border-radius:12px;padding:20px 24px;'
                 'font-size:0.92rem;line-height:1.8;">'
                 f'<strong>Method:</strong> {escape(details.get("method", "—"))}<br>'
                 f'<strong>Endpoint:</strong> {escape(details.get("endpoint", "—"))}<br>'
