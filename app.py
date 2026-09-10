@@ -29,6 +29,7 @@ div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
 
 /* ── Tabs ── */
 button[data-baseweb="tab"] {
+    background: #000000;
     font-weight: 600 !important;
     font-size: 0.88rem !important;
 }
@@ -454,7 +455,7 @@ if "response" in st.session_state:
         if "request_details" in st.session_state:
             details = st.session_state.request_details
             st.markdown(
-                '<div style="background:linear-gradient(135deg,#f8fafc,#eef2ff);'
+                '<div style="background:#000000;'
                 'border:1px solid #e0e7ff;border-radius:12px;padding:20px 24px;'
                 'font-size:0.92rem;line-height:1.8;">'
                 f'<strong>Method:</strong> {escape(details.get("method", "—"))}<br>'
