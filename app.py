@@ -13,17 +13,20 @@ st.markdown("""
 <style>
 /* ── Metric cards ── */
 div[data-testid="stMetric"] {
-    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-    border: 1px solid #e0e7ff;
+    background: #000000;
+    border: 1px solid #333333;
     border-radius: 12px;
     padding: 16px 20px;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 div[data-testid="stMetric"] label {
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #64748b;
+    color: #94a3b8 !important;
+}
+div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
+    color: #ffffff !important;
 }
 
 /* ── Tabs ── */
@@ -34,19 +37,9 @@ button[data-baseweb="tab"] {
 
 /* ── Expander cards ── */
 div[data-testid="stExpander"] {
-    background: #000000 !important;
     border-radius: 12px !important;
-    border: 1px solid #333333 !important;
+    border: 1px solid #e2e8f0 !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-div[data-testid="stExpander"] summary,
-div[data-testid="stExpander"] summary span,
-div[data-testid="stExpander"] svg {
-    color: #ffffff !important;
-    fill: #ffffff !important;
-}
-div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
-    color: #ffffff !important;
 }
 
 /* ── Primary button ── */
@@ -62,8 +55,20 @@ button[kind="primary"]:hover {
 
 /* ── JSON viewer ── */
 div[data-testid="stJson"] {
+    background: #000000 !important;
     border-radius: 10px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #333333;
+    color: #ffffff !important;
+}
+
+/* ── Tab content panels ── */
+div[data-testid="stTabs"] > div[role="tabpanel"] {
+    background: #000000;
+    border-radius: 0 0 10px 10px;
+    padding: 12px;
+}
+div[data-testid="stTabs"] > div[role="tabpanel"] * {
+    color: #ffffff;
 }
 
 /* ── Text input / text area ── */
