@@ -27,9 +27,28 @@ div[data-testid="stMetric"] label {
 }
 
 /* ── Tabs ── */
+div[data-testid="stTabs"] {
+    background: #000000;
+    border-radius: 10px;
+    padding: 8px;
+}
 button[data-baseweb="tab"] {
     font-weight: 600 !important;
     font-size: 0.88rem !important;
+    color: #ffffff !important;
+}
+button[data-baseweb="tab"]:hover {
+    color: #93c5fd !important;
+}
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: #ffffff !important;
+}
+
+/* ── Dividers ── */
+hr {
+    border-color: #000000 !important;
+    background: #000000 !important;
+    height: 2px !important;
 }
 
 /* ── Expander cards ── */
