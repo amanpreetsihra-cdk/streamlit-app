@@ -452,7 +452,7 @@ if "response" in st.session_state:
         if "request_details" in st.session_state:
             details = st.session_state.request_details
             st.markdown(
-                'font-size:0.92rem;line-height:1.8;">'
+                '<div style=font-size:0.92rem;line-height:1.8;">'
                 f'<strong>Method:</strong> {escape(details.get("method", "—"))}<br>'
                 f'<strong>Endpoint:</strong> {escape(details.get("endpoint", "—"))}<br>'
                 f'<strong>Status:</strong> {response.status_code}<br>'
