@@ -27,35 +27,26 @@ div[data-testid="stMetric"] label {
 }
 
 /* ── Tabs ── */
-div[data-testid="stTabs"] {
-    background: #000000;
-    border-radius: 10px;
-    padding: 8px;
-}
 button[data-baseweb="tab"] {
     font-weight: 600 !important;
     font-size: 0.88rem !important;
-    color: #ffffff !important;
-}
-button[data-baseweb="tab"]:hover {
-    color: #93c5fd !important;
-}
-button[data-baseweb="tab"][aria-selected="true"] {
-    color: #ffffff !important;
-}
-
-/* ── Dividers ── */
-hr {
-    border-color: #000000 !important;
-    background: #000000 !important;
-    height: 2px !important;
 }
 
 /* ── Expander cards ── */
 div[data-testid="stExpander"] {
+    background: #000000 !important;
     border-radius: 12px !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #333333 !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+div[data-testid="stExpander"] summary,
+div[data-testid="stExpander"] summary span,
+div[data-testid="stExpander"] svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
+    color: #ffffff !important;
 }
 
 /* ── Primary button ── */
